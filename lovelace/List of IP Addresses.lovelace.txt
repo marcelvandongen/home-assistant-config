@@ -1,0 +1,14 @@
+type: entity-filter
+title: List of IP Addresses
+entities:
+  - sensor.experiabox_v10_packets_sent
+state_filter:
+  - 'on'
+card:
+  type: markdown
+  content: |
+    List og devices and IP-addresses
+
+    {% for state in states.device_tracker|sort(attribute="name") -%}
+      {{ state.name | lower }} = {{ state.attributes.ip }}
+    {% endfor %}
