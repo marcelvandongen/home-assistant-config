@@ -1,0 +1,78 @@
+homeassistant:
+
+mqtt:
+  broker: !secret MQTT_BROKER
+  port: !secret MQTT_PORT
+  discovery: true
+  discovery_prefix: homeassistant
+  username: !secret MQTT_USERNAME
+  password: !secret MQTT_PASSWORD
+  client_id: 'home-assistant'
+
+switch:
+  - platform: mqtt
+    name: KlikAan KlikUit 1 Waskamer
+    command_topic: "home/OpenMQTTGateway/commands/MQTTtoSRFB"
+    state_topic: "home/OpenMQTTGateway/SRFBtoMQTT"
+    payload_on: "21"
+    payload_off: "20"
+#    device_class: Switch
+    optimistic: false
+    qos: 1
+    retain: false
+    
+  - platform: mqtt
+    name: KlikAan KlikUit 2 Waskamer
+    command_topic: "home/OpenMQTTGateway/commands/MQTTtoSRFB"
+    state_topic: "home/OpenMQTTGateway/SRFBtoMQTT"
+    payload_on: "16405"
+    payload_off: "16404"
+#    device_class: Switch
+    optimistic: false
+    qos: 1
+    retain: false
+
+  - platform: mqtt
+    name: KlikAan KlikUit 3 Waskamer
+    command_topic: "home/OpenMQTTGateway/commands/MQTTtoSRFB"
+    state_topic: "home/OpenMQTTGateway/SRFBtoMQTT"
+    payload_on: "4117"
+    payload_off: "4116"
+#    device_class: Switch
+    optimistic: false
+    qos: 1
+    retain: false
+
+  - platform: mqtt
+    name: Zonwering
+    command_topic: "home/OpenMQTTGateway/commands/MQTTtoSRFB"
+    state_topic: "home/OpenMQTTGateway/SRFBtoMQTT"
+#bovenste knop
+    payload_on: "1382144"
+#middelste knop: 12007281
+#onderste knop
+    payload_off: "12007288"
+#    device_class: Switch
+    optimistic: false
+    qos: 1
+    retain: false
+
+# Magic Cubes
+
+  - platform: mqtt
+    name: "Magic Cube Woonkamer"
+    state_topic: "home/magic_cube_woonkamer"
+    command_topic: "home/magic_cube_woonkamer"
+    qos: 1
+
+  - platform: mqtt
+    name: "Magic Cube Slaapkamer"
+    state_topic: "home/magic_cube_slaapkamer"
+    command_topic: "home/magic_cube_slaapkamer"
+    qos: 1
+
+  - platform: mqtt
+    name: "Magic Cube Jinny"
+    state_topic: "home/magic_cube_jinny"
+    command_topic: "home/magic_cube_jinny"
+    qos: 1

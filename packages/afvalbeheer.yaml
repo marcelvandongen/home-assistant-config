@@ -1,0 +1,32 @@
+homeassistant:
+
+sensor:
+  - platform: afvalbeheer
+    wastecollector: DenHaag
+    resources:
+      - restafval
+      - gft
+      - papier
+#pmd = plastic, blik en drinkverpakkingen
+      - pmd
+      - gftgratis
+      - textiel
+      - glas
+      - grofvuil
+      - asbest
+      - apparaten
+      - chemisch
+      - sloopafval
+      - takken
+      - kca
+      - pbd
+      - duobak
+    postcode: !secret HOME_ADDRESS_POSTCODE
+    streetnumber: !secret HOME_ADDRESS_NUMBER
+    upcomingsensor: 0
+    dateformat: '%d-%m-%Y'
+    dateonly: 0
+    name: "afval_den_haag"
+    nameprefix: 0
+    builtinicons: 0
+    dutch: 1

@@ -1,0 +1,5 @@
+homeassistant:
+
+fastdotcom:
+  scan_interval:
+      minutes: 30

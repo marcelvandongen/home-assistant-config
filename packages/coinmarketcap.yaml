@@ -1,0 +1,14 @@
+homeassistant:
+
+sensor:
+  - platform: coinmarketcap
+#Bitcoin
+    currency_id: 1
+    display_currency: USD
+    display_currency_decimals: 2
+
+  - platform: coinmarketcap
+#Bitcoin Cash
+    currency_id: 1831
+    display_currency: BTC
+    display_currency_decimals: 8

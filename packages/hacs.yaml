@@ -1,0 +1,4 @@
+homeassistant:
+
+hacs:
+  token: !secret GITHUB_TOKEN

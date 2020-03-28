@@ -1,0 +1,11 @@
+homeassistant:
+
+sensor:
+  - platform: p2000
+    name: P2000 Haaglanden
+    regios: 15
+    disciplines: 1,2,3,4
+    radius: 10000
+    scan_interval: 30
+    latitude: !secret HOME_LATITUDE
+    longitude: !secret HOME_LONGITUDE

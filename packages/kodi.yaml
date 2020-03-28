@@ -1,0 +1,127 @@
+homeassistant:
+
+media_player:
+  - platform: kodi
+    name: Kodi Mecool KM3
+    host: 192.168.2.106
+    username: !secret KODI_USERNAME
+    password: !secret KODI_PASSWORD
+
+  - platform: kodi
+    name: Kodi HK1 Mini
+    host: 192.168.2.9
+    username: !secret KODI_USERNAME
+    password: !secret KODI_PASSWORD
+    
+notify:
+  - platform: kodi
+    name: Kodi Mecool KM3
+    host: 192.168.2.106
+    username: !secret KODI_USERNAME
+    password: !secret KODI_PASSWORD
+
+  - platform: kodi
+    name: Kodi HK1 Mini
+    host: 192.168.2.9
+    username: !secret KODI_USERNAME
+    password: !secret KODI_PASSWORD
+
+#sensor:
+#  - platform: kodi_recently_added
+#    name: Kodi_HK1_Mini
+#    host: 192.168.2.9
+#    username: kodi
+#    password: !secret kodi_password
+
+script:
+
+  kodi_remote_up:
+    alias: Kodi remote key up
+    sequence:
+    - alias: Kodi Remote Up
+      service: kodi.call_method
+      entity_id: media_player.kodi_hk1_mini
+      data:
+        method: Input.Up
+  kodi_remote_down:
+    alias: Kodi remote key down
+    sequence:
+    - alias: Kodi Remote Down
+      service: kodi.call_method
+      entity_id: media_player.kodi_hk1_mini
+      data:
+        method: Input.Down
+  kodi_remote_left:
+    alias: Kodi remote key left
+    sequence:
+    - alias: Kodi Remote Left
+      service: kodi.call_method
+      entity_id: media_player.kodi_hk1_mini
+      data:
+        method: Input.Left
+  kodi_remote_right:
+    alias: Kodi remote key right
+    sequence:
+    - alias: Kodi Remote Right
+      service: kodi.call_method
+      entity_id: media_player.kodi_hk1_mini
+      data:
+        method: Input.Right
+  kodi_remote_select:
+    alias: Kodi remote key select
+    sequence:
+    - alias: Kodi Remote Select
+      service: kodi.call_method
+      entity_id: media_player.kodi_hk1_mini
+      data:
+        method: Input.Select
+  kodi_remote_home:
+    alias: Kodi remote key home
+    sequence:
+    - alias: Kodi Remote Home
+      service: kodi.call_method
+      entity_id: media_player.kodi_hk1_mini
+      data:
+        method: Input.Home
+  kodi_remote_back:
+    alias: Kodi remote key back
+    sequence:
+    - alias: Kodi Remote Back
+      service: kodi.call_method
+      entity_id: media_player.kodi_hk1_mini
+      data:
+        method: Input.Back
+  kodi_remote_next:
+    alias: Media Player Next track
+    sequence:
+    - alias: Kodi Remote Next
+      service: media_player.media_next_track
+      entity_id: media_player.kodi_hk1_mini
+      data: {}
+  kodi_remote_prev:
+    alias: Kodi remote previous track
+    sequence:
+    - alias: Kodi Remote Prev
+      service: media_player.media_previous_track
+      entity_id: media_player.kodi_hk1_mini
+      data: {}
+  kodi_remote_play_pause:
+    alias: Media Player Play Pause
+    sequence:
+    - alias: Kodi Remote PlayPause
+      service: media_player.media_play_pause
+      entity_id: media_player.kodi_hk1_mini
+  kodi_remote_stop:
+    alias: Media Player Stop
+    sequence:
+    - alias: Kodi Remote Stop
+      entity_id: media_player.kodi_hk1_mini
+      service: media_player.media_stop
+  kodi_remote_playlist:
+    alias: Kodi remote detail album
+    sequence:
+    - alias: Kodi Remote Playlist
+      entity_id: media_player.kodi_hk1_mini
+      service: kodi.call_method
+      data:
+        method: Audio.Details.Album

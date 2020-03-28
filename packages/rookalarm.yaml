@@ -1,0 +1,103 @@
+homeassistant:
+
+script:
+
+  brand_alarm_loop:
+    alias: Brand Alarm loop
+    sequence:
+    - delay: '2'
+    - data: {}
+      entity_id: script.brand_alarm
+      service: script.turn_on
+
+  brand_alarm:
+    alias: Brand Alarm
+    sequence:
+    - service: media_player.volume_set
+      entity_id: media_player.kodi_mecool_km3
+      data:
+        volume_level: '0.90'
+    - data:
+        data:
+          displaytime: 20000
+          icon: warning
+        message: Brand Alarm
+        title: Home Assistant
+      service: notify.kodi_mecool_km3
+    - data:
+        entity_id: media_player.kodi_mecool_km3
+        message: Brand Alarm
+      service: tts.google_translate_say
+    - data:
+        message: Brand Alarm (1)
+      service: notify.nokia_8_marcel
+    - data:
+        message: Brand Alarm (2)
+      service: notify.mobile_app_nokia_8_marcel
+    - service: notify.mobile_app_ta_1012
+      data:
+        message: Brand Alarm (3)
+    - data:
+        action: recover
+        count: 5
+        transitions:
+        - RGBTransition:
+          - 255
+          - 0
+          - 0
+          - 500
+          - 100
+        - SleepTransition:
+          - 100
+        - RGBTransition:
+          - 0
+          - 255
+          - 0
+          - 500
+          - 100
+        - SleepTransition:
+          - 100
+      entity_id: light.woonkamer, light.hal
+      service: yeelight.set_color_flow_scene
+    - data:
+        volume_level: '0.10'
+      entity_id: media_player.kodi_mecool_km3
+      service: media_player.volume_set
+    - data: {}
+      entity_id: script.brand_alarm_loop
+      service: script.turn_on
+ 
+automation:
+
+- id: '1583091765936'
+  alias: Brand alarm aan
+  description: ''
+  trigger:
+  - device_id: 8f66f54530924e68afc2e9ae54944f88
+    domain: binary_sensor
+    entity_id: binary_sensor.rookalarm
+    platform: device
+    type: smoke
+  condition: []
+  action:
+  - data: {}
+    entity_id: script.brand_alarm
+    service: script.turn_on
+
+- id: '1583091979553'
+  alias: Brand alarm uit
+  description: ''
+  trigger:
+  - device_id: 8f66f54530924e68afc2e9ae54944f88
+    domain: binary_sensor
+    entity_id: binary_sensor.rookalarm
+    platform: device
+    type: no_smoke
+  condition: []
+  action:
+  - data: {}
+    entity_id: script.brand_alarm
+    service: script.turn_off
+  - data: {}
+    entity_id: script.brand_alarm_loop
+    service: script.turn_off

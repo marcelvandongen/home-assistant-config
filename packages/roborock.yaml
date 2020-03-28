@@ -1,0 +1,167 @@
+homeassistant:
+
+vacuum:
+  - platform: xiaomi_miio
+    name: Stoffel
+    host: '192.168.2.212'
+    token: !secret XIAOMI_ROBOROCK_TOKEN
+
+sensor:
+- platform: template
+  sensors:
+    vacuum_start_time_weekdays:
+      friendly_name: 'Start (Weekdays)'
+      value_template: '{{ "%0.02d:%0.02d" | format(states("input_number.vacuum_start_hour_weekdays") | int, states("input_number.vacuum_start_minutes_weekdays") | int) }}'
+    vacuum_start_time_weekend:
+      friendly_name: 'Start (Weekend)'
+      value_template: '{{ "%0.02d:%0.02d" | format(states("input_number.vacuum_start_hour_weekend") | int, states("input_number.vacuum_start_minutes_weekend") | int) }}'
+    vacuum_status:
+      friendly_name: "Vacuum - Status"
+      value_template: "Status: {{ states.vacuum.stoffel.attributes.status }}"
+    vacuum_weekdays:
+      friendly_name: "Vacuum - Weekdays"
+      value_template: "Weekdays:"
+    vacuum_weekend:
+      friendly_name: "Vacuum - Weekend"
+      value_template: "Weekend:"
+    vacuum_battery:
+      friendly_name: "Vacuum - Battery"
+      value_template: "Battery: {{ states.vacuum.stoffel.attributes.battery_level }}"
+      device_class: battery
+      unit_of_measurement: '%'
+    vacuum_accessories:
+      friendly_name: "Vacuum - Accessoires"
+      value_template: "Accessories"
+    vacuum_operation:
+      friendly_name: "Vacuum - Operation"
+      value_template: "Operation"
+    vacuum_name:
+      friendly_name: "Vacuum - Accessoires"
+      value_template: "Stoffel"
+    vacuum_main_brush:
+      friendly_name: "Vacuum - Main brush"
+      value_template: "Main brush: {{ states.vacuum.stoffel.attributes.main_brush_left }} h"
+    vacuum_side_brush:
+      friendly_name: "Vacuum - Side brush"
+      value_template: "Side brush: {{ states.vacuum.stoffel.attributes.side_brush_left }} h"
+    vacuum_filter:
+      friendly_name: "Vacuum - Filter"
+      value_template: "Filter: {{ states.vacuum.stoffel.attributes.filter_left }} h"
+    vacuum_sensor:
+      friendly_name: "Vacuum - Sensor"
+      value_template: "Sensor: {{ states.vacuum.stoffel.attributes.sensor_dirty_left }} h"
+
+    vacuum_cleaned_area:
+      friendly_name: "Area cleaned"
+      unit_of_measurement: 'm2'
+      value_template: "Last area cleaned: {{ state_attr('vacuum.stoffel', 'cleaned_area') }}"
+    vacuum_cleaning_time:
+      friendly_name: "Time cleaned"
+      unit_of_measurement: 'min'
+      value_template: "Duration: {{ state_attr('vacuum.stoffel', 'cleaning_time') }}"
+
+    vacuum_total_cleaned_area:
+      friendly_name: "Total area cleaned"
+      unit_of_measurement: 'm2'
+      value_template: "Total area cleaned: {{ state_attr('vacuum.stoffel', 'total_cleaned_area') }}"
+    vacuum_total_cleaning_time:
+      friendly_name: "Total time cleaned"
+      unit_of_measurement: 'min'
+      value_template: "Total time: {{ state_attr('vacuum.stoffel', 'total_cleaning_time') }}"
+
+    vacuum_last_cleaning_time:
+      friendly_name: "Last cleaning time"
+      value_template: >
+        Last:
+        {% if state_attr('automation.cleaning_timer_weekdays', 'last_triggered') > state_attr('automation.cleaning_timer_weekend', 'last_triggered') -%}
+          {{ state_attr('automation.cleaning_timer_weekdays', 'last_triggered').strftime('%a %d-%m %H:%m') }}
+        {%- else -%}
+          {{ state_attr('automation.cleaning_timer_weekend', 'last_triggered').strftime('%a %d-%m %H:%m') }}
+        {%- endif -%}
+
+    vacuum_mode:
+      friendly_name: "Vacuum mode"
+      value_template: "Mode: {% if states.vacuum.stoffel.attributes.fan_speed == 101 %}Silent
+                             {% elif states.vacuum.stoffel.attributes.fan_speed == 102 %}Standard
+                             {% elif states.vacuum.stoffel.attributes.fan_speed == 103 %}Medium
+                             {% elif states.vacuum.stoffel.attributes.fan_speed == 104 %}Turbo
+                             {% elif states.vacuum.stoffel.attributes.fan_speed == 'Gentle' %}Gentle
+                             {% endif %}"
+    vacuum_state:
+      friendly_name: "Vacuum state"
+      value_template: "State: {{ states('vacuum.stoffel') }}"
+
+input_number:
+
+  vacuum_start_minutes_weekend:
+    name: Minutes
+    initial: 0
+    min: 0
+    max: 59
+    step: 1
+    mode: slider
+  vacuum_start_hour_weekend:
+    name: Hour
+    initial: 13
+    min: 0
+    max: 23
+    step: 1
+    mode: slider
+  vacuum_start_minutes_weekdays:
+    name: Minutes
+    initial: 0
+    min: 0
+    max: 59
+    step: 1
+    mode: slider
+  vacuum_start_hour_weekdays:
+    name: Hour
+    initial: 15
+    min: 0
+    max: 23
+    step: 1
+    mode: slider
+
+automation:
+
+- id: cleaning_timer_weekdays
+  alias: Cleaning timer weekdays
+  trigger:
+  - platform: template
+    value_template: '{{ states.sensor.vacuum_start_time_weekdays.state == states.sensor.time.state }}'
+  condition:
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+  action:
+  - data:
+      entity_id: vacuum.stoffel
+    service: vacuum.locate
+  - delay: 0:02
+  - data:
+      entity_id: vacuum.stoffel
+    service: vacuum.start
+
+- id: cleaning_timer_weekend
+  alias: cleaning timer weekend
+  trigger:
+  - platform: template
+    value_template: '{{ states.sensor.vacuum_start_time_weekend.state == states.sensor.time.state }}'
+  condition:
+  - condition: time
+    weekday:
+    - sat
+    - sun
+  action:
+  - data:
+      entity_id: vacuum.stoffel
+    service: vacuum.locate
+  - delay: 0:02
+  - data:
+      entity_id: vacuum.stoffel
+    service: vacuum.start
+

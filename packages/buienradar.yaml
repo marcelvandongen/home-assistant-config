@@ -1,0 +1,5 @@
+homeassistant:
+
+camera:
+  - platform: buienradar
+

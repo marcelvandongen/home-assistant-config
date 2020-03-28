@@ -1,0 +1,21 @@
+homeassistant:
+
+notify:
+  - platform: pushbullet
+    name: Nokia 8 Marcel
+    api_key: !secret PUSHBULLET_MARCEL_API
+
+sensor:
+  - platform: pushbullet
+    api_key: !secret PUSHBULLET_MARCEL_API
+    monitored_conditions:
+      - application_name
+      - body
+      - notification_id
+      - notification_tag
+      - package_name
+      - receiver_email
+      - sender_email
+      - source_device_iden
+      - title
+      - type

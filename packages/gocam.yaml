@@ -1,0 +1,84 @@
+homeassistant:
+#################################################################
+## Customize
+#################################################################
+  customize:
+
+    camera.camera_1:
+      friendly_name: Camera 1 (kastenkamer)
+      icon: mdi:webcam
+    camera.camera_2:
+      friendly_name: Camera 2 (woonkamer op vensterbank)
+      icon: mdi:webcam
+#    camera.camera_3:
+#      friendly_name: Camera 3 (woonkamer op tv kast)
+#      icon: mdi:webcam
+    camera.camera_4:
+      friendly_name: Camera 4 (tuin)
+      icon: mdi:webcam
+
+#################################################################
+## Camera's
+#################################################################
+
+camera:
+# In de kastenkamer
+  - platform: p2pcgicamera
+    name: Camera 1
+    username: !secret CAMERA_USERNAME
+    password: !secret CAMERA_PASSWORD
+    ip: 192.168.2.95
+    port: 80
+    still_image_url: http://192.168.2.95/snapshot.cgi
+    mjpeg_url: http://192.168.2.95/videostream.cgi?rate=0
+    
+# Woonkamer op het raamkozijn
+  - platform: p2pcgicamera
+    name: Camera 2
+    username: !secret CAMERA_USERNAME
+    password: !secret CAMERA_PASSWORD
+    ip: 192.168.2.64
+    port: 80
+    still_image_url: http://192.168.2.64/snapshot.cgi
+    mjpeg_url: http://192.168.2.64/videostream.cgi?rate=0
+
+# Kapot !
+# Woonkamer op de TV-kast
+#  - platform: mjpeg
+#    name: Camera 3
+#    still_image_url: http://192.168.2.43/snapshot.cgi
+#    mjpeg_url: http://192.168.2.43/videostream.cgi?rate=0
+##    mjpeg_url: http://{{ state_attr('device_tracker.camera_3_wifi', 'ip') }}/videostream.cgi?rate=0
+##   mjpeg_url: http://{{ state_attr('device_tracker.camera_3_wifi', 'ip') }}/videostream.cgi?rate=0
+##    mjpeg_url: http://{% if states.device_tracker.camera_3_wifi %}{{ state_attr('device_tracker.camera_3_wifi', 'ip') }}{% else %}unknown{% endif %}/videostream.cgi?rate=0
+#    username: !secret CAMERA_USERNAME
+#    password: !secret CAMERA_PASSWORD
+#    verify_ssl: false
+
+#  - platform: ipcameracgi
+#    name: Camera 3B
+#    username: !secret CAMERA_USERNAME
+#    password: !secret CAMERA_PASSWORD
+#    ip: 192.168.2.43
+#    port: 80
+
+# In de tuin
+
+  - platform: p2pcgicamera
+    name: Camera 4
+    username: !secret CAMERA_USERNAME
+    password: !secret CAMERA_PASSWORD
+    ip: 192.168.2.172
+    port: 80
+    still_image_url: http://192.168.2.172/snapshot.cgi
+    mjpeg_url: http://192.168.2.172/videostream.cgi?rate=0
+
+#################################################################
+## Scripts
+#################################################################
+
+#################################################################
+## Automations
+#################################################################
+
+
