@@ -1,0 +1,386 @@
+type: vertical-stack
+cards:
+  - elements:
+      - entity: vacuum.stoffel
+        icon: 'mdi:play'
+        style:
+          '--paper-item-icon-color': 'rgb(115, 122, 130)'
+          left: 30%
+          top: 90%
+        tap_action:
+          action: call-service
+          service: vacuum.start
+          service_data:
+            entity_id: vacuum.stoffel
+        type: icon
+      - entity: vacuum.stoffel
+        icon: 'mdi:pause'
+        style:
+          '--paper-item-icon-color': 'rgb(115, 122, 130)'
+          left: 40%
+          top: 90%
+        tap_action:
+          action: call-service
+          service: vacuum.pause
+          service_data:
+            entity_id: vacuum.stoffel
+        type: icon
+      - entity: vacuum.stoffel
+        icon: 'mdi:stop'
+        style:
+          '--paper-item-icon-color': 'rgb(115, 122, 130)'
+          left: 50%
+          top: 90%
+        tap_action:
+          action: call-service
+          service: vacuum.stop
+          service_data:
+            entity_id: vacuum.stoffel
+        type: icon
+      - entity: vacuum.stoffel
+        icon: 'mdi:home'
+        style:
+          '--paper-item-icon-color': 'rgb(115, 122, 130)'
+          left: 60%
+          top: 90%
+        tap_action:
+          action: call-service
+          service: vacuum.return_to_base
+          service_data:
+            entity_id: vacuum.stoffel
+        type: icon
+      - entity: vacuum.stoffel
+        icon: 'mdi:bell-ring'
+        style:
+          '--paper-item-icon-color': 'rgb(115, 122, 130)'
+          left: 70%
+          top: 90%
+        tap_action:
+          action: call-service
+          service: vacuum.locate
+          service_data:
+            entity_id: vacuum.stoffel
+        type: icon
+      - entity: sensor.vacuum_operation
+        style:
+          background-color: 'rgb(54, 65, 78)'
+          border-color: 'rgb(34, 154, 210)'
+          color: 'rgb(255, 255, 255)'
+          font-family: Trebuchet MS
+          font-size: 90%
+          font-weight: bold
+          left: 1%
+          opacity: 0.8
+          pointer-events: none
+          text-shadow: 1px 1px black
+          top: 10%
+          transform: 'translate(0%,-50%)'
+        type: state-label
+      - entity: sensor.vacuum_name
+        style:
+          border-color: 'rgb(34, 154, 210)'
+          color: 'rgb(255, 255, 255)'
+          font-family: Trebuchet MS
+          font-size: 250%
+          font-weight: bold
+          left: 35%
+          opacity: 0.8
+          pointer-events: none
+          text-shadow: 1px 1px black
+          top: 10%
+          transform: 'translate(0%,-50%)'
+        type: state-label
+      - entity: sensor.vacuum_accessories
+        style:
+          background-color: 'rgb(54, 65, 78)'
+          border-color: 'rgb(34, 154, 210)'
+          color: 'rgb(255, 255, 255)'
+          font-family: Trebuchet MS
+          font-size: 90%
+          font-weight: bold
+          opacity: 0.8
+          pointer-events: none
+          right: 1%
+          text-shadow: 1px 1px black
+          top: 10%
+          transform: 'translate(0%,-50%)'
+        type: state-label
+      - entity: sensor.vacuum_main_brush
+        style:
+          border-color: 'rgb(34, 154, 210)'
+          border-right-style: solid
+          color: 'rgb(255, 255, 255)'
+          font-family: Trebuchet MS
+          font-size: 90%
+          font-weight: bold
+          opacity: 0.8
+          pointer-events: none
+          right: 1%
+          text-shadow: 1px 1px black
+          top: 30%
+          transform: 'translate(0%,-50%)'
+        type: state-label
+      - entity: sensor.vacuum_side_brush
+        style:
+          border-color: 'rgb(34, 154, 210)'
+          border-right-style: solid
+          color: 'rgb(255, 255, 255)'
+          font-family: Trebuchet MS
+          font-size: 90%
+          font-weight: bold
+          opacity: 0.8
+          pointer-events: none
+          right: 1%
+          text-shadow: 1px 1px black
+          top: 40%
+          transform: 'translate(0%,-50%)'
+        type: state-label
+      - entity: sensor.vacuum_filter
+        style:
+          border-color: 'rgb(34, 154, 210)'
+          border-right-style: solid
+          color: 'rgb(255, 255, 255)'
+          font-family: Trebuchet MS
+          font-size: 90%
+          font-weight: bold
+          opacity: 0.8
+          pointer-events: none
+          right: 1%
+          text-shadow: 1px 1px black
+          top: 50%
+          transform: 'translate(0%,-50%)'
+        type: state-label
+      - entity: sensor.vacuum_sensor
+        style:
+          border-color: 'rgb(34, 154, 210)'
+          border-right-style: solid
+          color: 'rgb(255, 255, 255)'
+          font-family: Trebuchet MS
+          font-size: 90%
+          font-weight: bold
+          opacity: 0.8
+          pointer-events: none
+          right: 1%
+          text-shadow: 1px 1px black
+          top: 60%
+          transform: 'translate(0%,-50%)'
+        type: state-label
+      - entity: sensor.vacuum_cleaned_area
+        style:
+          border-color: 'rgb(34, 154, 210)'
+          border-right-style: solid
+          color: 'rgb(255, 255, 255)'
+          font-family: Trebuchet MS
+          font-size: 90%
+          font-weight: bold
+          opacity: 0.8
+          pointer-events: none
+          right: 1%
+          text-shadow: 1px 1px black
+          top: 70%
+          transform: 'translate(0%,-50%)'
+        type: state-label
+      - entity: sensor.vacuum_cleaning_time
+        style:
+          border-color: 'rgb(34, 154, 210)'
+          border-right-style: solid
+          color: 'rgb(255, 255, 255)'
+          font-family: Trebuchet MS
+          font-size: 90%
+          font-weight: bold
+          opacity: 0.8
+          pointer-events: none
+          right: 1%
+          text-shadow: 1px 1px black
+          top: 80%
+          transform: 'translate(0%,-50%)'
+        type: state-label
+      - entity: sensor.vacuum_status
+        style:
+          border-color: 'rgb(34, 154, 210)'
+          border-left-style: solid
+          color: 'rgb(255, 255, 255)'
+          font-family: Trebuchet MS
+          font-size: 90%
+          font-weight: bold
+          left: 1%
+          opacity: 0.8
+          pointer-events: none
+          text-shadow: 1px 1px black
+          top: 30%
+          transform: 'translate(0%,-50%)'
+        type: state-label
+      - entity: sensor.vacuum_battery
+        style:
+          border-color: 'rgb(34, 154, 210)'
+          border-left-style: solid
+          color: 'rgb(255, 255, 255)'
+          font-family: Trebuchet MS
+          font-size: 90%
+          font-weight: bold
+          left: 1%
+          opacity: 0.8
+          pointer-events: none
+          text-shadow: 1px 1px black
+          top: 40%
+          transform: 'translate(0%,-50%)'
+        type: state-label
+      - entity: sensor.vacuum_weekdays
+        style:
+          border-color: 'rgb(34, 154, 210)'
+          border-left-style: solid
+          color: 'rgb(255, 255, 255)'
+          font-family: Trebuchet MS
+          font-size: 90%
+          font-weight: bold
+          left: 1%
+          opacity: 0.8
+          pointer-events: none
+          text-shadow: 1px 1px black
+          top: 50%
+          transform: 'translate(0%,-50%)'
+        type: state-label
+      - entity: sensor.vacuum_weekend
+        style:
+          border-color: 'rgb(34, 154, 210)'
+          border-left-style: solid
+          color: 'rgb(255, 255, 255)'
+          font-family: Trebuchet MS
+          font-size: 90%
+          font-weight: bold
+          left: 1%
+          opacity: 0.8
+          pointer-events: none
+          text-shadow: 1px 1px black
+          top: 60%
+          transform: 'translate(0%,-50%)'
+        type: state-label
+      - entity: automation.cleaning_timer_weekdays
+        image: /local/custom_lovelace/xiaomi_vacuum_map_card/timer-off.png
+        state_filter:
+          'off': brightness(80%) saturate(0.8)
+          'on': brightness(200%) saturate(1.8)
+        state_image:
+          'on': /local/custom_lovelace/xiaomi_vacuum_map_card/timer-on.png
+        style:
+          left: 21%
+          top: 50%
+        tap_action:
+          action: call-service
+          service: automation.toggle
+          service_data:
+            entity_id: automation.cleaning_timer_weekdays
+        type: image
+      - entity: automation.cleaning_timer_weekend
+        image: /local/custom_lovelace/xiaomi_vacuum_map_card/timer-off.png
+        state_filter:
+          'off': brightness(80%) saturate(0.8)
+          'on': brightness(200%) saturate(1.8)
+        state_image:
+          'on': /local/custom_lovelace/xiaomi_vacuum_map_card/timer-on.png
+        style:
+          left: 21%
+          top: 60%
+        tap_action:
+          action: call-service
+          service: automation.toggle
+          service_data:
+            entity_id: automation.cleaning_timer_weekdays
+        type: image
+      - entity: sensor.vacuum_mode
+        style:
+          border-color: 'rgb(34, 154, 210)'
+          border-left-style: solid
+          color: 'rgb(0, 0, 0)'
+          font-family: Trebuchet MS
+          font-size: 90%
+          font-weight: bold
+          left: 30%
+          opacity: 0.8
+          pointer-events: none
+          text-shadow: 1px 1px black
+          top: 25%
+          transform: 'translate(0%,-50%)'
+        type: state-label
+      - entity: sensor.vacuum_state
+        style:
+          border-color: 'rgb(34, 154, 210)'
+          border-left-style: solid
+          color: 'rgb(0, 0, 0)'
+          font-family: Trebuchet MS
+          font-size: 90%
+          font-weight: bold
+          left: 50%
+          opacity: 0.8
+          pointer-events: none
+          text-shadow: 1px 1px black
+          top: 25%
+          transform: 'translate(0%,-50%)'
+        type: state-label
+      - entity: sensor.vacuum_total_cleaned_area
+        style:
+          border-color: 'rgb(34, 154, 210)'
+          border-left-style: solid
+          color: 'rgb(255, 255, 255)'
+          font-family: Trebuchet MS
+          font-size: 90%
+          font-weight: bold
+          left: 1%
+          opacity: 0.8
+          pointer-events: none
+          text-shadow: 1px 1px black
+          top: 70%
+          transform: 'translate(0%,-50%)'
+        type: state-label
+      - entity: sensor.vacuum_total_cleaning_time
+        style:
+          border-color: 'rgb(34, 154, 210)'
+          border-left-style: solid
+          color: 'rgb(255, 255, 255)'
+          font-family: Trebuchet MS
+          font-size: 90%
+          font-weight: bold
+          left: 1%
+          opacity: 0.8
+          pointer-events: none
+          text-shadow: 1px 1px black
+          top: 80%
+          transform: 'translate(0%,-50%)'
+        type: state-label
+      - entity: sensor.vacuum_last_cleaning_time
+        style:
+          border-color: 'rgb(34, 154, 210)'
+          border-left-style: solid
+          color: 'rgb(255, 255, 255)'
+          font-family: Trebuchet MS
+          font-size: 90%
+          font-weight: bold
+          left: 35%
+          opacity: 0.8
+          pointer-events: none
+          text-shadow: 1px 1px black
+          top: 80%
+          transform: 'translate(0%,-50%)'
+        type: state-label
+    image: /local/community/lovelace-xiaomi-vacuum-card/vacuum.png
+    type: picture-elements
+  - card:
+      entities:
+        - sensor.vacuum_start_time_weekdays
+        - input_number.vacuum_start_hour_weekdays
+        - input_number.vacuum_start_minutes_weekdays
+      type: entities
+    conditions:
+      - entity: automation.cleaning_timer_weekdays
+        state: 'on'
+    type: conditional
+  - card:
+      entities:
+        - sensor.vacuum_start_time_weekend
+        - input_number.vacuum_start_hour_weekend
+        - input_number.vacuum_start_minutes_weekend
+      type: entities
+    conditions:
+      - entity: automation.cleaning_timer_weekend
+        state: 'on'
+    type: conditional
